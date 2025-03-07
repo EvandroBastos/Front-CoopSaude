@@ -1,0 +1,89 @@
+<div class="modal-header">
+  <img src="assets/images/logo-copms.png" alt="Logo COPMS" class="logo" />
+  <h4>VISUALIZAR DETALHES</h4>
+</div>
+
+<mat-tab-group>
+  <mat-tab label="Dados Pessoais">
+    <p><strong>Nome:</strong> {{ proponente.nome }}</p>
+    <p><strong>Sexo:</strong> {{ proponente.sexo }}</p>
+    <p><strong>Data de Nascimento:</strong> {{ proponente.dataNascimento | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Estado Civil:</strong> {{ proponente.estadoCivil }}</p>
+    <p><strong>Tipo Sanguíneo:</strong> {{ proponente.tipoSanguineo }}</p>
+    <p><strong>Nacionalidade:</strong> {{ proponente.nacionalidade }}</p>
+    <p><strong>Naturalidade:</strong> {{ proponente.naturalidade }}</p>
+    <p><strong>Cidade de Naturalidade:</strong> {{ proponente.cidadeNaturalidade }}</p>
+    <p><strong>Grau de Instrução:</strong> {{ proponente.grauInstrucao }}</p>
+    <p><strong>Comunhão de Bens:</strong> {{ proponente.comunhaoDeBens }}</p>
+    <p><strong>Nome do Pai:</strong> {{ proponente.filiacao?.nomePai }}</p>
+    <p><strong>Nome da Mãe:</strong> {{ proponente.filiacao?.nomeMae }}</p>
+  </mat-tab>
+
+  <mat-tab label="Endereço">
+    <p><strong>CEP:</strong> {{ proponente.endereco?.cep }}</p>
+    <p><strong>Tipo de Endereço:</strong> {{ proponente.endereco?.tipoEndereco }}</p>
+    <p><strong>Logradouro:</strong> {{ proponente.endereco?.logradouro }}</p>
+    <p><strong>Número:</strong> {{ proponente.endereco?.numero }}</p>
+    <p><strong>Complemento:</strong> {{ proponente.endereco?.complemento }}</p>
+    <p><strong>Bairro:</strong> {{ proponente.endereco?.bairro }}</p>
+    <p><strong>Cidade:</strong> {{ proponente.endereco?.cidade }}</p>
+    <p><strong>Estado:</strong> {{ proponente.endereco?.estado }}</p>
+  </mat-tab>
+
+  <mat-tab label="Documentos">
+    <ng-container *ngIf="(proponente.documentos || []).length > 0; else semDocumentos">
+      <div *ngFor="let doc of proponente.documentos || []">
+        <p><strong>Tipo de Documento:</strong> {{ doc.tipoDocumento }}</p>
+        <p><strong>Número:</strong> {{ doc.numero }}</p>
+        <p><strong>Órgão Expedidor:</strong> {{ doc.orgExpedidor || '-' }}</p>
+        <p><strong>UF do Órgão Expedidor:</strong> {{ doc.ufOrgExpedidor || '-' }}</p>
+        <p><strong>Data de Expedição:</strong> {{ doc.dataExpedicao | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Série:</strong> {{ doc.serie || '-' }}</p>
+        <hr>
+      </div>
+    </ng-container>
+
+    <ng-template #semDocumentos>
+      <p class="text-center">Nenhum documento cadastrado.</p>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Contatos">
+    <ng-container *ngIf="(proponente?.telefones?.length || 0) > 0 || (proponente?.emails?.length || 0) > 0; else semContatos">
+
+        <!-- Telefones -->
+        <div *ngIf="(proponente?.telefones?.length || 0) > 0">
+            <h5>
+                <i class="fas fa-phone-alt text-primary"></i> Telefones
+            </h5>
+            <div *ngFor="let telefone of proponente?.telefones">
+                <p><strong>Tipo:</strong> {{ telefone.tipoTelefone }}</p>
+                <p><strong>DDD:</strong> {{ telefone.ddd || '-' }}</p>
+                <p><strong>Número:</strong> {{ telefone.numero || '-' }}</p>
+                <hr>
+            </div>
+        </div>
+
+        <!-- E-mails -->
+        <div *ngIf="(proponente?.emails?.length || 0) > 0">
+            <h5>
+                <i class="fas fa-envelope text-danger"></i> E-mails
+            </h5>
+            <div *ngFor="let email of proponente?.emails">
+                <p><strong>Tipo:</strong> {{ email.tipoEmail }}</p>
+                <p><strong>Endereço:</strong> {{ email.endereco }}</p>
+                <hr>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #semContatos>
+        <p class="text-center">Nenhum contato cadastrado.</p>
+    </ng-template>
+</mat-tab>
+
+
+</mat-tab-group>
+
+<div class="text-center">
+  <button mat-button (click)="fechar()">Fechar</button>
+</div>

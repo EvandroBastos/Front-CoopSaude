@@ -1,0 +1,41 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-flex justify-content-between align-items-center bg-primary text-white">
+    <h4 class="mb-0">Anexos</h4>
+  </div>
+  <div class="card-body">
+    <!-- Upload de Arquivo -->
+    <div class="mb-3">
+      <input type="file" (change)="onFileSelected($event)">
+      <button class="btn btn-success mt-2" (click)="uploadArquivo()" [disabled]="isUploading">
+        <i class="fas fa-upload"></i> Fazer Upload
+      </button>
+      <div class="progress mt-2" *ngIf="isUploading">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+          [style.width.%]="uploadProgress">
+          {{ uploadProgress }}%
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Anexos -->
+    <div *ngIf="fileList.length > 0">
+      <h6>Arquivos Anexados:</h6>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let file of fileList">
+          {{ file }}
+          <div>
+            <button class="btn btn-info btn-sm me-2" (click)="downloadArquivo(file)">
+              <i class="fas fa-download"></i> Download
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="excluirArquivo(file)">
+              <i class="fas fa-trash-alt"></i> Excluir
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="fileList.length === 0">
+      <p class="text-muted">Nenhum arquivo anexado.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-flex justify-content-between align-items-center bg-primary text-white">
+      <h4 class="mb-0">Gestão de Pessoas</h4>
+      <button class="btn btn-success" (click)="abrirModalCadastroProponentes()">
+        <i class="fas fa-user-plus"></i> Adicionar Proponente
+      </button>
+
+
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+              <thead class="thead-dark">
+                  <tr>
+                      <th class="text-center" style="width: 50px;">
+                          <input type="checkbox" (change)="selecionarTodos($event)">
+                      </th>
+                      <th>Nome</th>
+                      <th>Sexo</th>
+                      <th>Data de Nascimento</th>
+                      <th>Grau de Instrução</th>
+                      <th>Arquivos Comprobatórios</th>
+                      <th>Contatos</th>
+                      <th class="text-center">Ações</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let pessoa of proponentes">
+                      <td class="text-center">
+                          <input type="checkbox" [(ngModel)]="pessoa.selecionado">
+                      </td>
+                      <td>{{ pessoa.nome }}</td>
+                      <td>{{ pessoa.sexo }}</td>
+                      <td>{{ pessoa.dataNascimento | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ pessoa.grauInstrucao }}</td>
+                      <td class="text-center">
+                        <button class="btn btn-info btn-sm" (click)="abrirModalVisualizar(pessoa)">
+                            <i class="fas fa-file-alt"></i> Visualizar
+                        </button>
+                        <button class="btn btn-success btn-sm" (click)="abrirModalAdicionar(pessoa)">
+                            <i class="fas fa-plus-circle"></i> Adicionar
+                        </button>
+                    </td>
+                      <td class="text-center">
+                        <i class="fas fa-phone-alt text-primary" (click)="mostrarContato(pessoa, 'telefone')"
+                           style="cursor: pointer; font-size: 18px;"></i>
+                        <i class="fas fa-envelope text-danger" (click)="mostrarContato(pessoa, 'email')"
+                           style="cursor: pointer; font-size: 18px; margin-left: 10px;"></i>
+                      </td>
+                      <td class="text-center">
+                          <button class="btn btn-primary btn-sm" (click)="editarProponente(pessoa)">
+                              <i class="fas fa-edit"></i>
+                          </button>
+                          <button class="btn btn-info btn-sm" (click)="detalhesProponente(pessoa)">
+                              <i class="fas fa-info-circle"></i>
+                          </button>
+                          <button class="btn btn-danger btn-sm" (click)="excluirProponente(pessoa)">
+                              <i class="fas fa-trash-alt"></i>
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+
+<!-- Modal para Visualização de Arquivos -->
+<div class="modal fade" id="modalVisualizarArquivos" tabindex="-1" aria-labelledby="modalVisualizarArquivosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalVisualizarArquivosLabel">Arquivos de {{ proponenteSelecionado?.nome }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nome Registrado</th>
+              <th>Tipo Anexo</th>
+              <th>Data Anexo</th>
+              <th>Responsável</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let arquivo of arquivosProponente">
+              <td>{{ arquivo.nome }}</td>
+              <td>{{ arquivo.tipoAnexo }}</td>
+              <td>{{ arquivo.dataRegistro }}</td>
+              <td>{{ arquivo.responsavel }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="downloadArquivo(arquivo.id)">
+                  <i class="fas fa-download"></i> Baixar
+                </button>
+                <button class="btn btn-success btn-sm" (click)="verArquivo(arquivo.id)">
+                  <i class="fas fa-eye"></i> Ver
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="excluirArquivo(arquivo.id)">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <p *ngIf="arquivosProponente.length === 0" class="text-muted">Nenhum arquivo anexado.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+          <!-- Modal para exibir Contatos -->
+          <div class="modal fade" id="modalContatos" tabindex="-1" aria-labelledby="modalContatosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content shadow-lg">
+                <div class="modal-header bg-primary text-white">
+                  <h5 class="modal-title" id="modalContatosLabel">
+                    Contatos de {{ contatoSelecionado?.nome }}
+                  </h5>
+                  <button type="button" class="btn-close" (click)="fecharModal()" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Exibe Telefones -->
+                  <div *ngIf="tipoContatoSelecionado === 'telefone'">
+                    <h6 class="text-primary">
+                      <i class="fas fa-phone-alt"></i> Telefones
+                    </h6>
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex align-items-center" *ngFor="let telefone of contatoSelecionado?.telefones">
+                        <i class="fas fa-phone text-primary me-2"></i> ({{ telefone.ddd }}) {{ telefone.numero }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Exibe E-mails -->
+                  <div *ngIf="tipoContatoSelecionado === 'email'">
+                    <h6 class="text-danger">
+                      <i class="fas fa-envelope"></i> E-mails
+                    </h6>
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex align-items-center" *ngFor="let email of contatoSelecionado?.emails">
+                        <i class="fas fa-envelope text-danger me-2"></i> {{ email.endereco }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+  </div>
+</div>

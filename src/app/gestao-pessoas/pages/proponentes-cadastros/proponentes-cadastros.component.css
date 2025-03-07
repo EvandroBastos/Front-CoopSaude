@@ -1,0 +1,112 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 900px;
+  margin-top: 30px;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto; /* Garante rolagem vertical caso necessário */
+  max-height: 70vh; /* Ajuste conforme necessário */
+  padding: 15px;
+}
+
+.card {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.card-header {
+  background: #007bff !important;
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px 10px 0 0;
+}
+
+.custom-modal .mat-dialog-container {
+  width: 100% !important;
+  max-width: 1400px !important; /* Ajuste conforme necessário */
+  height: 90vh; /* Defina uma altura máxima do modal */
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap; /* Evita quebra para nova linha */
+  overflow: hidden; /* Evita a barra de rolagem */
+  white-space: nowrap;
+}
+
+.nav-tabs .nav-item {
+  flex-grow: 1; /* Distribui o espaço igualmente entre as abas */
+  text-align: center;
+}
+
+.nav-tabs .nav-link {
+  min-width: auto; /* Ajusta para evitar estouro */
+  padding: 10px 15px;
+}
+
+.form-control, .form-select {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.card-footer {
+  text-align: center;
+  padding: 15px;
+}
+
+@media (max-width: 768px) {
+  .container {
+      max-width: 100%;
+      padding: 15px;
+  }
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Faz o modal ocupar toda a altura */
+}
+

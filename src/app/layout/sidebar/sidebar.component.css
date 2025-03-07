@@ -1,0 +1,27 @@
+.nav .dropdown-toggle::after {
+  display: none; /* Remove a seta padrão */
+}
+
+#submenuGestaoPessoas {
+  display: none;
+}
+
+#submenuGestaoPessoas.show {
+  display: block;
+}
+
+.nav-link {
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #008F39 !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link.active {
+  background-color: #00652A !important;
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

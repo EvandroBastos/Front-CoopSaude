@@ -1,0 +1,11 @@
+.logo-copms {
+  width: 120px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+.navbar {
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}

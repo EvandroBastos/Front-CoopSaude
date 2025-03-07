@@ -1,0 +1,105 @@
+.modal-dialog {
+  max-width: 800px; /* Define uma largura fixa */
+  width: 100%;
+}
+.modal-body {
+  flex-grow: 1; /* Permite que o conteúdo cresça sem quebrar o layout */
+  overflow-y: auto; /* Ativa rolagem caso o conteúdo ultrapasse a altura definida */
+}
+
+/* Mantém todas as abas com a mesma altura */
+.mat-tab-body-wrapper {
+  min-height: 400px; /* Define uma altura mínima fixa para todas as abas */
+}
+
+.modal-header h2 {
+  font-size: 12px; /* Reduz tamanho do título */
+  margin: 0;
+}
+
+
+.icon {
+  width: 20px; /* ou outro tamanho apropriado */
+  height: auto;
+  vertical-align: middle;
+  margin-right: 8px; /* Espaço entre o ícone e o texto */
+}
+
+
+.logo {
+  max-width: 60px; /* Tamanho menor para melhor ajuste */
+  height: auto;
+  margin-right: 10px; /* Espaçamento entre a logo e o título */
+}
+
+
+/* Ajuste para o cabeçalho do modal */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o título */
+  width: 100%;
+  padding: 10px;
+  position: relative;
+}
+.modal-header img {
+  position: absolute;
+  left: 10px; /* Mantém a logo na esquerda */
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1; /* Permite que o título fique centralizado */
+}
+
+/* Botão de Fechar */
+.close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilizar Seções */
+mat-tab-group {
+  font-family: 'Arial', sans-serif;
+}
+
+p {
+  font-size: 14px;
+  padding: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+
+p strong {
+  font-weight: bold;
+  color: #222;
+  min-width: 150px; /* Mantém um tamanho fixo */
+  display: inline-block;
+}
+
+.modal-footer {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  width: 100%;
+}
+
+.modal-content {
+  height: 600px; /* Define uma altura fixa */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Impede que o modal aumente inesperadamente */
+}
+.tab-pane {
+  min-height: 400px; /* Mantém todas as abas com a mesma altura */
+  overflow-y: auto; /* Permite rolagem se necessário */
+}
+

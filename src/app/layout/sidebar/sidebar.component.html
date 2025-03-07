@@ -1,0 +1,63 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-primary text-white" style="width: 250px; height: 100vh;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <span class="fs-4">Admin Painel</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+
+    <li class="nav-item">
+      <a [routerLink]="'/dashboard'" routerLinkActive="active" class="nav-link text-white">
+        <i class="fas fa-chart-line me-2"></i> Dashboard
+      </a>
+    </li>
+
+<!-- GESTÃO DE PESSOAS COM SUBMENU -->
+<li class="nav-item">
+  <a class="nav-link text-white d-flex justify-content-between align-items-center"
+     (click)="toggleSubmenu()" role="button">
+    <span>
+      <i class="fas fa-user-friends me-2"></i> Gestão de Pessoas
+    </span>
+    <i class="fas fa-chevron-down" [ngClass]="{ 'rotate': submenuAberto }"></i>
+  </a>
+
+  <!-- Submenu - Só aparece se submenuAberto for verdadeiro -->
+  <ul class="nav flex-column ms-3 list-unstyled ps-3" *ngIf="submenuAberto">
+    <li>
+      <a [routerLink]="'/gestao-pessoas'" routerLinkActive="active" class="nav-link text-white">
+        <i class="fas fa-user-pen me-2"></i> Proponentes
+    </a>
+    </li>
+    <li>
+      <a [routerLink]="'/gestao-pessoas/cooperados'" routerLinkActive="active" class="nav-link text-white">
+        <i class="fas fa-user-check me-2"></i> Cooperados
+      </a>
+    </li>
+  </ul>
+</li>
+
+
+    <li class="nav-item">
+      <a [routerLink]="'/licitacoes'" routerLinkActive="active" class="nav-link text-white">
+        <i class="fas fa-users me-2"></i> Licitações
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a [routerLink]="'/relatorio'" routerLinkActive="active" class="nav-link text-white">
+        <i class="fas fa-file-alt me-2"></i> Relatório
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a [routerLink]="'/configuracao'" routerLinkActive="active" class="nav-link text-white">
+        <i class="fas fa-cogs me-2"></i> Configuração
+      </a>
+    </li>
+
+  </ul>
+  <hr>
+  <div class="text-center">
+    <button class="btn btn-outline-light btn-sm w-100" (click)="toggleDarkMode()">Toggle Dark Mode</button>
+  </div>
+</div>

@@ -1,0 +1,315 @@
+<div class="card shadow mb-4">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Cadastro do Proponente</h5>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="formProponente">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="dados-pessoais-tab" data-bs-toggle="tab" data-bs-target="#dados-pessoais" type="button" role="tab" aria-controls="dados-pessoais" aria-selected="true">Dados Pessoais</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="endereco-tab" data-bs-toggle="tab" data-bs-target="#endereco" type="button" role="tab" aria-controls="endereco" aria-selected="false">Endereço</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="documentos-tab" data-bs-toggle="tab" data-bs-target="#documentos" type="button" role="tab" aria-controls="documentos" aria-selected="false">Documentos</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contatos-tab" data-bs-toggle="tab" data-bs-target="#contatos" type="button" role="tab" aria-controls="contatos" aria-selected="false">Contatos</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="anexos-tab" data-bs-toggle="tab" data-bs-target="#anexos" type="button" role="tab" aria-controls="anexos" aria-selected="false">Anexos</button>
+        </li>
+      </ul>
+
+      <div class="tab-content mt-3" id="myTabContent">
+        <!-- Dados Pessoais -->
+        <div class="tab-pane fade show active" id="dados-pessoais" role="tabpanel" aria-labelledby="dados-pessoais-tab">
+          <div class="mb-3">
+              <label for="nome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome" formControlName="nome">
+          </div>
+          <div class="mb-3">
+              <label for="sexo" class="form-label">Sexo</label>
+              <select class="form-select" id="sexo" formControlName="sexo">
+                  <option value="">Selecione</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+              </select>
+          </div>
+          <div class="mb-3">
+              <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+              <input type="date" class="form-control" id="dataNascimento" formControlName="dataNascimento">
+          </div>
+          <div class="mb-3">
+            <label for="estadoCivil" class="form-label">Estado Civil</label>
+            <select class="form-select" id="estadoCivil" formControlName="estadoCivil">
+                <option value="">Selecione...</option>
+                <option value="solteiro">Solteiro</option>
+                <option value="casado">Casado</option>
+                <option value="divorciado">Divorciado</option>
+                <option value="viuvo">Viúvo</option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label for="dataFalecimento" class="form-label">Data de Falecimento</label>
+          <input type="date" class="form-control" id="dataFalecimento" formControlName="dataFalecimento">
+      </div>
+      <div class="mb-3">
+        <label for="tipoSanguineo" class="form-label">Tipo Sanguíneo</label>
+        <select class="form-select" id="tipoSanguineo" formControlName="tipoSanguineo">
+          <option value="">Selecione...</option>
+          <option *ngFor="let tipo of tiposSanguineo" [value]="tipo">
+            {{ tipo }}
+          </option>
+        </select>
+      </div>
+
+
+    <div class="col-md-6 mb-3">
+      <label for="nacionalidade" class="form-label">Nacionalidade</label>
+      <input type="text" class="form-control" id="nacionalidade" formControlName="nacionalidade" placeholder="Nacionalidade">
+  </div>
+  <div class="mb-3">
+      <label for="naturalidade" class="form-label">Naturalidade</label>
+      <input type="text" class="form-control" id="naturalidade" formControlName="naturalidade" placeholder="Naturalidade">
+  </div>
+  <div class="mb-3">
+      <label for="cidadeNaturalidade" class="form-label">Cidade de Naturalidade</label>
+      <input type="text" class="form-control" id="cidadeNaturalidade" formControlName="cidadeNaturalidade" placeholder="Cidade de Naturalidade">
+  </div>
+  <div class="mb-3">
+    <label for="grauInstrucao" class="form-label">Grau de Instrução</label>
+    <select class="form-select" id="grauInstrucao" formControlName="grauInstrucao">
+      <option value="">Selecione...</option>
+      <option *ngFor="let grau of grausInstrucao" [value]="grau.key">
+        {{ grau.value }}
+      </option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="comunhaoDeBens" class="form-label">Comunhão de Bens</label>
+    <select class="form-select" formControlName="comunhaoDeBens">
+      <option [ngValue]="TipoComunhao.NaoInformado">Selecione...</option>
+      <option [ngValue]="TipoComunhao.ComunhaoDeBens">Comunhão de Bens</option>
+      <option [ngValue]="TipoComunhao.SeparacaoDeBens">Separação de Bens</option>
+      <option [ngValue]="TipoComunhao.Universal">Universal</option>
+      <option [ngValue]="TipoComunhao.Total">Total</option>
+      <option [ngValue]="TipoComunhao.Parcial">Parcial</option>
+    </select>
+  </div>
+    <div formGroupName="filiacao">
+      <div class="form-group">
+        <label for="nomePai">Nome do Pai</label>
+        <input type="text" class="form-control" id="nomePai" formControlName="nomePai" placeholder="Nome do Pai">
+      </div>
+      <div class="form-group">
+        <label for="nomeMae">Nome da Mãe</label>
+        <input type="text" class="form-control" id="nomeMae" formControlName="nomeMae" placeholder="Nome da Mãe">
+      </div>
+    </div>
+  </div>
+
+
+     <!-- Aba Endereço -->
+     <!-- Endereço -->
+<div class="tab-pane fade" id="endereco" role="tabpanel" aria-labelledby="endereco-tab" formGroupName="endereco">
+  <div class="mb-3">
+  <label for="cep" class="form-label">CEP</label>
+  <input type="text" class="form-control" id="cep" formControlName="cep">
+  </div>
+  <div class="mb-3">
+  <label for="tipoEndereco" class="form-label">Tipo de Endereço</label>
+  <select class="form-select" id="tipoEndereco" formControlName="tipoEndereco">
+  <option value="">Selecione...</option>
+  <option *ngFor="let tipo of tiposEndereco" [value]="tipo">{{ tipo }}</option>
+  </select>
+  </div>
+  <div class="mb-3">
+  <label for="logradouro" class="form-label">Logradouro</label>
+  <input type="text" class="form-control" id="logradouro" formControlName="logradouro">
+  </div>
+  <div class="mb-3">
+  <label for="numero" class="form-label">Número</label>
+  <input type="text" class="form-control" id="numero" formControlName="numero">
+  </div>
+  <div class="mb-3">
+  <label for="complemento" class="form-label">Complemento</label>
+  <input type="text" class="form-control" id="complemento" formControlName="complemento">
+  </div>
+  <div class="mb-3">
+  <label for="bairro" class="form-label">Bairro</label>
+  <input type="text" class="form-control" id="bairro" formControlName="bairro">
+  </div>
+  <div class="mb-3">
+  <label for="cidade" class="form-label">Cidade</label>
+  <input type="text" class="form-control" id="cidade" formControlName="cidade">
+  </div>
+  <div class="mb-3">
+  <label for="estado" class="form-label">Estado</label>
+  <input type="text" class="form-control" id="estado" formControlName="estado">
+  </div>
+  </div>
+
+
+         <!-- Documentos -->
+<div class="tab-pane fade" id="documentos" role="tabpanel" aria-labelledby="documentos-tab">
+  <button class="btn btn-success mb-3" (click)="adicionarDocumento()">
+  <i class="fas fa-plus-circle"></i> Adicionar Documento
+  </button>
+
+  <div formArrayName="documentos">
+  <div *ngFor="let documento of documentos.controls; let i=index" [formGroupName]="i" class="card mb-3">
+  <div class="card-body">
+  <div class="row">
+  <div class="mb-3">
+  <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+  <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento">
+    <option value="">Selecione...</option>
+    <option *ngFor="let tipo of tiposDocumento" [value]="tipo.value">
+      {{ tipo.key }}
+    </option>
+  </select>
+  </div>
+  <div class="col-md-4 mb-3">
+  <label for="numero" class="form-label">Número</label>
+  <input type="text" class="form-control" formControlName="numero" placeholder="Número do documento">
+  </div>
+  <div class="col-md-4 mb-3">
+  <label for="orgExpedidor" class="form-label">Orgão Expedidor</label>
+  <input type="text" class="form-control" formControlName="orgExpedidor" placeholder="SSP, DETRAN, etc.">
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-md-4 mb-3">
+  <label for="ufOrgExpedidor" class="form-label">UF do Orgão Expedidor</label>
+  <input type="text" class="form-control" formControlName="ufOrgExpedidor" placeholder="UF">
+  </div>
+  <div class="col-md-4 mb-3">
+  <label for="dataExpedicao" class="form-label">Data de Expedição</label>
+  <input type="date" class="form-control" formControlName="dataExpedicao">
+  </div>
+  <div class="col-md-4 mb-3">
+  <label for="serie" class="form-label">Série</label>
+  <input type="text" class="form-control" formControlName="serie">
+  </div>
+  </div>
+  <button class="btn btn-danger" (click)="removerDocumento(i)">Remover Documento</button>
+  </div>
+  </div>
+  </div>
+  </div>
+
+     <!-- Contatos -->
+<div class="tab-pane fade" id="contatos" role="tabpanel" aria-labelledby="contatos-tab">
+  <!-- Telefones -->
+  <button class="btn btn-success mb-3" (click)="adicionarTelefone()">
+  <i class="fas fa-plus-circle"></i> Adicionar Telefone
+  </button>
+
+  <div formArrayName="telefones">
+  <div *ngFor="let telefone of telefones.controls; let i = index" [formGroupName]="i" class="card mb-3">
+  <div class="card-body">
+  <div class="row">
+  <div class="mb-3">
+  <label for="tipoTelefone" class="form-label">Tipo de Telefone</label>
+  <select class="form-select" formControlName="tipoTelefone" id="tipoTelefone">
+  <option value="">Selecione...</option>
+  <option *ngFor="let tipo of tiposContato" [value]="tipo">{{ tipo }}</option>
+  </select>
+  </div>
+  <div class="col-md-2 mb-3">
+  <label for="ddd" class="form-label">DDD</label>
+  <input type="text" class="form-control" formControlName="ddd" placeholder="DDD">
+  </div>
+  <div class="col-md-4 mb-3">
+  <label for="numero" class="form-label">Número</label>
+  <input type="text" class="form-control" formControlName="numero" placeholder="Número do Telefone">
+  </div>
+  <div class="col-md-2 mb-3 d-flex align-items-end">
+  <button class="btn btn-danger" (click)="removerTelefone(i)">Remover</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- Emails -->
+  <button class="btn btn-success mb-3" (click)="adicionarEmail()">
+  <i class="fas fa-plus-circle"></i> Adicionar Email
+  </button>
+
+  <div formArrayName="emails">
+  <div *ngFor="let email of emails.controls; let i = index" [formGroupName]="i" class="card mb-3">
+  <div class="card-body">
+  <div class="row">
+  <div class="mb-3">
+  <label for="tipoEmail" class="form-label">Tipo de Email</label>
+  <select class="form-select" formControlName="tipoEmail" id="tipoEmail">
+  <option value="">Selecione...</option>
+  <option *ngFor="let tipo of tiposContato" [value]="tipo">{{ tipo }}</option>
+  </select>
+  </div>
+  <div class="col-md-6 mb-3">
+  <label for="endereco" class="form-label">Endereço de Email</label>
+  <input type="email" class="form-control" formControlName="endereco" placeholder="Email">
+  </div>
+  <div class="col-md-2 mb-3 d-flex align-items-end">
+  <button class="btn btn-danger" (click)="removerEmail(i)">Remover</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+ <!-- Aba Anexos -->
+ <div class="tab-pane fade" id="anexos" role="tabpanel" aria-labelledby="anexos-tab">
+  <h5><i class="fas fa-folder-open"></i> Anexos</h5>
+
+  <!-- Seletor de Arquivos -->
+  <div class="mb-3">
+    <input type="file" multiple (change)="selecionarArquivo($event)">
+  </div>
+
+  <!-- Tabela para exibir os arquivos -->
+  <!-- Lista de Arquivos em Grid -->
+  <table class="table table-striped" [formGroup]="formProponente">
+    <thead>
+      <tr>
+        <th>Nome do Documento</th>
+        <th>Arquivo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody formArrayName="arquivos">
+      <tr *ngFor="let arquivo of arquivos.controls; let i = index">
+        <td [formGroupName]="i">
+          <input type="text" formControlName="nomeDocumento" class="form-control"
+            placeholder="Digite um nome para o documento">
+        </td>
+        <td>{{ arquivo.get('nome')?.value }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="removerArquivo(i)">
+            <i class="fas fa-trash-alt"></i> Remover
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="arquivosSelecionados.length === 0">
+    <p class="text-muted">Nenhum arquivo anexado.</p>
+  </div>
+</div>
+      </div>
+
+
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="fecharModalCadastro()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="salvarProponente()">Salvar</button>
+  </div>
+</div>
